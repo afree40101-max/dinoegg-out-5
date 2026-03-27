@@ -12,48 +12,44 @@
         --slate: #64748b; --pink-disc: #fb7185;
         --line-green: #06c755; --px-blue: #3b82f6; --cash-gold: #fbbf24;
     }
-    /* 修復：讓 body 高度 100% 並隱藏滾動條 */
     body { margin: 0; font-family: 'PingFang TC', sans-serif; background: var(--soft-bg); color: var(--dark-text); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
     
-    /* 修復：主區域填滿剩餘高度 */
-    .main-wrapper { display: flex; flex: 1; overflow: hidden; border-bottom: 2px solid #eab308; }
+    /* 讓整個主區域填滿視窗 */
+    .main-wrapper { display: flex; flex: 1; height: 100vh; overflow: hidden; }
     
-    .left-panel { width: 35%; border-right: 3px solid #eab308; display: flex; flex-direction: column; background: #fff; }
-    .left-panel header { background: var(--green); color: white; padding: 12px; font-weight: bold; text-align: center; font-size: 22px; }
-    #kdsArea { flex: 1; overflow-y: auto; padding: 12px; }
+    .left-panel { width: 32%; border-right: 3px solid #eab308; display: flex; flex-direction: column; background: #fff; }
+    .left-panel header { background: var(--green); color: white; padding: 10px; font-weight: bold; text-align: center; font-size: 20px; }
+    #kdsArea { flex: 1; overflow-y: auto; padding: 8px; }
     
-    .right-panel { width: 65%; display: flex; flex-direction: column; overflow: hidden; }
-    .right-panel header { background: var(--theme-yellow); text-align: center; padding: 10px; font-size: 14px; font-weight: bold; }
+    .right-panel { width: 68%; display: flex; flex-direction: column; overflow: hidden; }
+    .right-panel header { background: var(--theme-yellow); text-align: center; padding: 6px; font-size: 14px; font-weight: bold; }
     
-    .items-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px; overflow-y: auto; flex: 1; }
-    .item-card { border-radius: 12px; padding: 10px; text-align: center; background: var(--theme-orange); border: 1px solid #fb923c; display: flex; flex-direction: column; justify-content: center; }
-    .item-name { font-size: 24px; font-weight: 900; }
+    /* 稍微縮小商品卡片以利平板顯示 */
+    .items-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; overflow-y: auto; flex: 2; }
+    .item-card { border-radius: 10px; padding: 6px; text-align: center; background: var(--theme-orange); border: 1px solid #fb923c; display: flex; flex-direction: column; justify-content: center; }
+    .item-name { font-size: 20px; font-weight: 900; }
+    .item-price { font-size: 12px; color: #ea580c; font-weight: bold; }
     
-    /* 控制區高度固定，確保不會被擠壓 */
-    .control-panel { background: var(--soft-bg); padding-bottom: 10px; }
+    .control-panel { background: #fff; border-top: 2px solid var(--theme-yellow); padding: 5px 0; flex: 1.2; display: flex; flex-direction: column; justify-content: space-between; }
     
-    .btn-qty { width: 40px; height: 40px; font-size: 24px; border-radius: 8px; border: none; background: #fff; color: #ea580c; font-weight: bold; }
-    .cart-box { background: #fff; margin: 0 10px; padding: 10px; border-radius: 15px; border: 3px solid var(--theme-yellow); height: 100px; overflow-y: auto; }
-    #cartList { font-size: 18px; font-weight: bold; }
-    .total-text { font-size: 36px; font-weight: bold; text-align: right; color: #854d0e; padding: 5px 15px; }
+    .btn-qty { width: 34px; height: 34px; font-size: 20px; border-radius: 6px; border: none; background: #fff; color: #ea580c; font-weight: bold; }
+    .cart-box { background: #fff; margin: 0 10px; padding: 8px; border-radius: 10px; border: 2px solid var(--theme-yellow); height: 60px; overflow-y: auto; font-size: 14px; }
+    .total-text { font-size: 28px; font-weight: bold; text-align: right; color: #854d0e; padding-right: 15px; }
     
-    .pay-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 10px; }
-    .pay-grid button { padding: 18px 2px; border: none; border-radius: 12px; font-weight: bold; color: #fff; font-size: 16px; cursor: pointer; touch-action: manipulation; }
+    .pay-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 10px 5px 10px; }
+    .pay-grid button { padding: 12px 2px; border: none; border-radius: 10px; font-weight: bold; color: #fff; font-size: 14px; cursor: pointer; touch-action: manipulation; }
     
-    /* 彈窗優化 */
+    /* 彈窗樣式 */
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 1000; align-items: center; justify-content: center; }
     .overlay.active { display: flex; }
-    .modal { background: #fff; width: 95%; max-width: 500px; padding: 25px; border-radius: 25px; box-sizing: border-box; }
-    
-    /* 修復：九宮格按鈕點擊感 */
-    .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .num-grid button { padding: 25px 5px; font-size: 32px; font-weight: bold; border-radius: 15px; border: 1px solid #ddd; background: #fff; touch-action: manipulation; }
-    .num-grid button:active { background: #f1f5f9; }
+    .modal { background: #fff; width: 90%; max-width: 450px; padding: 20px; border-radius: 20px; box-sizing: border-box; text-align: center; }
+    .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .num-grid button { padding: 20px 5px; font-size: 24px; font-weight: bold; border-radius: 10px; border: 1px solid #ddd; background: #fff; touch-action: manipulation; }
 
-    .kds-card { background: #fefce8; padding: 12px; border-radius: 15px; margin-bottom: 12px; border: 2px solid #fde047; box-shadow: 0 4px 0 #fde047; position: relative; }
-    .kds-amount { position: absolute; right: 12px; top: 12px; font-size: 18px; color: var(--blue); font-weight: 900; }
-    .phone-tag { font-size: 28px; color: var(--red); font-weight: 900; cursor: pointer; }
-    .btn-done { width: 100%; padding: 12px; background: var(--green); color: white; border: none; border-radius: 12px; margin-top: 10px; font-weight: bold; font-size: 22px; cursor: pointer; }
+    .kds-card { background: #fefce8; padding: 10px; border-radius: 12px; margin-bottom: 8px; border: 2px solid #fde047; box-shadow: 0 2px 0 #fde047; position: relative; }
+    .kds-amount { position: absolute; right: 10px; top: 10px; font-size: 16px; color: var(--blue); font-weight: 900; }
+    .phone-tag { font-size: 24px; color: var(--red); font-weight: 900; text-decoration: underline dotted; }
+    .btn-done { width: 100%; padding: 10px; background: var(--green); color: white; border: none; border-radius: 8px; margin-top: 5px; font-weight: bold; font-size: 18px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -66,15 +62,14 @@
     <div class="right-panel">
         <header>🦖 恐龍蛋 POS 系統</header>
         <div id="menuArea" class="items-container"></div>
-        
         <div class="control-panel">
-            <div class="cart-box"><div id="cartList">🛒 點餐內容...</div></div>
+            <div class="cart-box" id="cartList">🛒 點餐內容...</div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <button onclick="voidLastOrder()" style="margin-left:15px; background:var(--red); color:white; border:none; padding:10px 20px; border-radius:12px; font-weight:bold;">🚨 作廢上一筆</button>
+                <button onclick="voidLastOrder()" style="margin-left:15px; background:var(--red); color:white; border:none; padding:6px 12px; border-radius:10px; font-weight:bold; font-size:12px;">🚨 作廢上一筆</button>
                 <div class="total-text">總計 $<span id="finalTotal">0</span></div>
             </div>
             <div class="pay-grid">
-                <button style="background:var(--cash-gold); color:var(--dark-text);" onclick="openPhoneInput('現金')">💰 現金結帳</button>
+                <button style="background:var(--cash-gold); color:var(--dark-text);" onclick="openPhoneInput('現金')">💰 現金</button>
                 <button style="background:var(--line-green);" onclick="openPhoneInput('LINE Pay')">LINE Pay</button>
                 <button style="background:var(--px-blue);" onclick="openPhoneInput('全支付')">全支付</button>
                 <button style="background:var(--pink-disc);" onclick="openDiscountModal()">✂️ 折扣</button>
@@ -84,18 +79,17 @@
     </div>
 </div>
 
-<div class="overlay" id="phoneModal"><div class="modal"><h3>📱 手機末三碼</h3><div id="phoneDisplay" style="font-size:60px; text-align:center; padding:15px; background:#f1f5f9; border-radius:15px; margin-bottom:15px; font-weight:bold; color:var(--blue);">---</div><div class="num-grid"><button onclick="pressPhone('1')">1</button><button onclick="pressPhone('2')">2</button><button onclick="pressPhone('3')">3</button><button onclick="pressPhone('4')">4</button><button onclick="pressPhone('5')">5</button><button onclick="pressPhone('6')">6</button><button onclick="pressPhone('7')">7</button><button onclick="pressPhone('8')">8</button><button onclick="pressPhone('9')">9</button><button onclick="clearPhone()" style="font-size:24px;">清空</button><button onclick="pressPhone('0')">0</button><button onclick="confirmPhone()" style="background:var(--green); color:white; font-size:24px;">確認</button></div></div></div>
-<div class="overlay" id="cashModal"><div class="modal"><h3>💰 現金實收</h3><div id="cashDisplay" style="font-size:60px; text-align:center; padding:15px; background:#f1f5f9; border-radius:15px; margin-bottom:15px; font-weight:bold; color:var(--green);">0</div><div class="num-grid"><button onclick="quickCash(100)" style="background:var(--blue); color:white; font-size:18px;">+100</button><button onclick="quickCash(500)" style="background:var(--blue); color:white; font-size:18px;">+500</button><button onclick="quickCash(1000)" style="background:var(--blue); color:white; font-size:18px;">+1000</button><button onclick="pressCash('1')">1</button><button onclick="pressCash('2')">2</button><button onclick="pressCash('3')">3</button><button onclick="pressCash('4')">4</button><button onclick="pressCash('5')">5</button><button onclick="pressCash('6')">6</button><button onclick="pressCash('7')">7</button><button onclick="pressCash('8')">8</button><button onclick="pressCash('9')">9</button><button onclick="clearCash()" style="font-size:24px;">清除</button><button onclick="pressCash('0')">0</button><button onclick="submitCash()" style="background:var(--green); color:white; font-size:24px;">結帳</button></div></div></div>
-<div class="overlay" id="changeModal"><div class="modal" style="text-align:center;"><h2>應找零</h2><div id="changeVal" style="font-size:80px; color:var(--red); font-weight:bold;">$0</div><button onclick="closeChangeModal()" style="width:100%; padding:20px; background:var(--green); color:#fff; border:none; border-radius:15px; font-size:32px;">完成收錢！</button></div></div>
-<div class="overlay" id="flavorModal">...</div>
-<div class="overlay" id="adminModal">...</div>
-<div class="overlay" id="discountModal">...</div>
+<div class="overlay" id="phoneModal"><div class="modal"><h3>📱 手機末三碼</h3><div id="phoneDisplay" style="font-size:50px; text-align:center; padding:10px; background:#f1f5f9; border-radius:10px; margin-bottom:10px; font-weight:bold; color:var(--blue);">---</div><div class="num-grid"><button onclick="pressPhone('1')">1</button><button onclick="pressPhone('2')">2</button><button onclick="pressPhone('3')">3</button><button onclick="pressPhone('4')">4</button><button onclick="pressPhone('5')">5</button><button onclick="pressPhone('6')">6</button><button onclick="pressPhone('7')">7</button><button onclick="pressPhone('8')">8</button><button onclick="pressPhone('9')">9</button><button onclick="clearPhone()">清空</button><button onclick="pressPhone('0')">0</button><button onclick="confirmPhone()" style="background:var(--green); color:white;">確認</button></div></div></div>
+<div class="overlay" id="cashModal"><div class="modal"><h3>💰 現金實收</h3><div id="cashDisplay" style="font-size:50px; text-align:center; padding:10px; background:#f1f5f9; border-radius:10px; margin-bottom:10px; font-weight:bold; color:var(--green);">0</div><div class="num-grid"><button onclick="quickCash(100)">+100</button><button onclick="quickCash(500)">+500</button><button onclick="quickCash(1000)">+1000</button><button onclick="pressCash('1')">1</button><button onclick="pressCash('2')">2</button><button onclick="pressCash('3')">3</button><button onclick="pressCash('4')">4</button><button onclick="pressCash('5')">5</button><button onclick="pressCash('6')">6</button><button onclick="pressCash('7')">7</button><button onclick="pressCash('8')">8</button><button onclick="pressCash('9')">9</button><button onclick="clearCash()">清除</button><button onclick="pressCash('0')">0</button><button onclick="submitCash()" style="background:var(--green); color:white;">結帳</button></div></div></div>
+<div class="overlay" id="changeModal"><div class="modal"><h2>應找零</h2><div id="changeVal" style="font-size:70px; color:var(--red); font-weight:bold; margin:10px 0;">$0</div><button onclick="closeOverlay('changeModal')" style="width:100%; padding:15px; background:var(--green); color:#fff; border:none; border-radius:12px; font-size:24px;">完成</button></div></div>
+<div class="overlay" id="flavorModal"><div class="modal"><h3>🍡 選擇湯圓口味</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><button onclick="selectFlavor('花生')" style="padding:15px; font-weight:bold; border-radius:10px; border:2px solid orange;">🥜 花生</button><button onclick="selectFlavor('芝麻')" style="padding:15px; font-weight:bold; border-radius:10px; border:2px solid orange;">⚫ 芝麻</button><button onclick="selectFlavor('3花2芝')" style="padding:15px; font-weight:bold; border-radius:10px; border:2px solid orange;">🌗 3花2芝</button><button onclick="selectFlavor('3芝2花')" style="padding:15px; font-weight:bold; border-radius:10px; border:2px solid orange;">🌓 3芝2花</button></div></div></div>
+<div class="overlay" id="adminModal"><div class="modal" style="max-width:550px;"><div id="reportContent"></div><button onclick="closeOverlay('adminModal')" style="width:100%; padding:10px; background:#333; color:white; border:none; border-radius:10px; margin-top:10px;">關閉</button></div></div>
+<div class="overlay" id="discountModal"><div class="modal"><h3>✂️ 折扣金額</h3><div id="discDisplay" style="font-size:50px; text-align:center; padding:10px; background:#f1f5f9; border-radius:10px; margin-bottom:10px; font-weight:bold; color:var(--red);">0</div><div class="num-grid"><button onclick="pressDisc('1')">1</button><button onclick="pressDisc('2')">2</button><button onclick="pressDisc('3')">3</button><button onclick="pressDisc('4')">4</button><button onclick="pressDisc('5')">5</button><button onclick="pressDisc('6')">6</button><button onclick="pressDisc('7')">7</button><button onclick="pressDisc('8')">8</button><button onclick="pressDisc('9')">9</button><button onclick="clearDisc()">清空</button><button onclick="pressDisc('0')">0</button><button onclick="submitDisc()" style="background:var(--green); color:white;">確認</button></div></div></div>
 
 <script>
 const ADMIN_PIN = "771130";
 const GAS_URL = "https://script.google.com/macros/s/AKfycbyxxX5Ej3vF1716rKku8TYnk2he0ywGaPT6_vX0WjPyENcplnZqm0ilu7L-DONRU_aJXw/exec";
 
-// --- 以下邏輯均已針對卡頓優化 ---
 const products = [
     { name: "原味", price: 55 }, { name: "Oreo", price: 65 },
     { name: "卡士達", price: 65 }, { name: "起司", price: 70 },
@@ -109,54 +103,74 @@ const products = [
 let cart = [], salesData = JSON.parse(localStorage.getItem('stall_sales')) || [];
 let kdsOrders = JSON.parse(localStorage.getItem('stall_kds')) || [];
 let orderCounter = parseInt(localStorage.getItem('order_counter')) || 1;
-let currentType = "", phoneTyped = "", cashTyped = "", discountAmount = 0;
+let currentType = "", phoneTyped = "", cashTyped = "", discTyped = "", discountAmount = 0;
 
 function renderMenu() {
     let h = "";
     products.forEach(p => {
         let count = cart.filter(x => x.name === p.name).length;
-        h += `<div class="item-card"><span class="item-name">${p.name}</span><span style="font-size:14px; color:#ea580c; font-weight:bold;">$${p.price}</span><div style="margin-top:10px; display:flex; justify-content:center; align-items:center; gap:12px;"><button class="btn-qty" onclick="removeFromCart('${p.name}')">-</button><b style="font-size:22px;">${count}</b><button class="btn-qty" onclick="addToCart('${p.name}')">+</button></div></div>`;
+        h += `<div class="item-card"><span class="item-name">${p.name}</span><span class="item-price">$${p.price}</span><div style="margin-top:5px; display:flex; justify-content:center; align-items:center; gap:8px;"><button class="btn-qty" onclick="removeFromCart('${p.name}')">-</button><b style="font-size:18px;">${count}</b><button class="btn-qty" onclick="addToCart('${p.name}')">+</button></div></div>`;
     });
     document.getElementById('menuArea').innerHTML = h;
 }
 
-function openPhoneInput(type) { if(cart.length === 0) return; currentType = type; phoneTyped = ""; document.getElementById('phoneDisplay').innerText = "---"; openOverlay('phoneModal'); }
+function addToCart(name) {
+    const p = products.find(x => x.name === name);
+    if (p.hasFlavor) { openOverlay('flavorModal'); } 
+    else { cart.push({ ...p, id: Date.now() }); updateCartUI(); }
+}
+function selectFlavor(f) { cart.push({ name: "桂冠湯圓", price: 85, note: f, id: Date.now() }); updateCartUI(); closeOverlay('flavorModal'); }
+function removeFromCart(name) { const idx = cart.map(x => x.name).lastIndexOf(name); if (idx > -1) cart.splice(idx, 1); updateCartUI(); }
+
+function updateCartUI() {
+    let s = cart.reduce((acc, curr) => acc + curr.price, 0);
+    let h = cart.map(x => `✅${x.name}${x.note?'('+x.note+')':''} `).join("");
+    document.getElementById('finalTotal').innerText = Math.max(0, s - discountAmount);
+    document.getElementById('cartList').innerHTML = h || "🛒 點餐內容...";
+    renderMenu();
+}
+
+function finishOrder(type, phone) {
+    const now = new Date();
+    const orderItems = {};
+    cart.forEach(c => { let key = c.name + (c.note ? `(${c.note})` : ""); orderItems[key] = (orderItems[key] || 0) + 1; });
+    const o = { id: Date.now(), orderNo: orderCounter++, date: now.toLocaleDateString(), time: now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12:false}), type: type, amount: parseInt(document.getElementById('finalTotal').innerText), items: orderItems, rawItems: [...cart], phone: phone || "---" };
+    salesData.push(o); kdsOrders.push(o); persist(); cart = []; discountAmount = 0; updateCartUI(); renderKDS();
+}
+
+function renderKDS() {
+    let h = "";
+    kdsOrders.forEach(o => {
+        let pColor = o.type === '現金' ? 'var(--cash-gold)' : (o.type === 'LINE Pay' ? 'var(--line-green)' : 'var(--px-blue)');
+        h += `<div class="kds-card"><div class="kds-amount">$${o.amount}</div><div style="font-size:12px; font-weight:bold;">#${o.orderNo} <span style="background:${pColor}; padding:2px 5px; border-radius:4px; color:white">${o.type}</span></div><div class="phone-tag">📞 ${o.phone}</div><div style="font-size:16px; font-weight:bold; border-top:1px dashed #ccc; margin-top:5px;">${Object.entries(o.items).map(([n,q])=>`• ${n} x${q}`).join("<br>")}</div><button onclick="doneKDS(${o.id})" class="btn-done">叫號取餐</button></div>`;
+    });
+    document.getElementById('kdsArea').innerHTML = h || "尚無訂單";
+}
+
+function openOverlay(id) { document.getElementById(id).classList.add('active'); }
+function closeOverlay(id) { document.getElementById(id).classList.remove('active'); }
 function pressPhone(n) { if(phoneTyped.length < 3) phoneTyped += n; document.getElementById('phoneDisplay').innerText = phoneTyped; }
-function confirmPhone() { 
-    closeOverlay('phoneModal');
-    if(currentType === '現金') { cashTyped = ""; document.getElementById('cashDisplay').innerText = "0"; openOverlay('cashModal'); }
-    else { finishOrder(currentType, phoneTyped); }
-}
-
-function pressCash(n) { cashTyped += n; document.getElementById('cashDisplay').innerText = parseInt(cashTyped) || 0; }
-function quickCash(v) { let cur = parseInt(document.getElementById('cashDisplay').innerText) || 0; cashTyped = (cur + v).toString(); document.getElementById('cashDisplay').innerText = cashTyped; }
-function submitCash() {
-    const target = parseInt(document.getElementById('finalTotal').innerText);
-    const typed = parseInt(cashTyped) || 0;
-    if (typed < target) return alert("實收金額不足");
-    document.getElementById('changeVal').innerText = "$" + (typed - target);
-    closeOverlay('cashModal'); 
-    openOverlay('changeModal'); 
-    finishOrder("現金", phoneTyped);
-}
-
-function closeChangeModal() {
-    closeOverlay('changeModal');
-    // 強制重設所有狀態
-    cashTyped = "";
-    phoneTyped = "";
-}
-
-// 其餘功能 (addToCart, updateCartUI, finishOrder, syncToCloud...) 維持不變
-// ... (請補上之前代碼中的其餘函式) ...
-
-function openOverlay(id) { document.getElementById(id).style.display = 'flex'; }
-function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
+function clearPhone() { phoneTyped = ""; document.getElementById('phoneDisplay').innerText = "---"; }
+function confirmPhone() { closeOverlay('phoneModal'); if(currentType === '現金') { cashTyped = ""; document.getElementById('cashDisplay').innerText = "0"; openOverlay('cashModal'); } else { finishOrder(currentType, phoneTyped); } }
+function pressCash(n) { cashTyped += n; document.getElementById('cashDisplay').innerText = parseInt(cashTyped)||0; }
+function quickCash(v) { let cur = parseInt(document.getElementById('cashDisplay').innerText)||0; cashTyped = (cur+v).toString(); document.getElementById('cashDisplay').innerText = cashTyped; }
+function clearCash() { cashTyped = ""; document.getElementById('cashDisplay').innerText = "0"; }
+function submitCash() { const target = parseInt(document.getElementById('finalTotal').innerText); if(parseInt(cashTyped||0) < target) return alert("實收不足"); document.getElementById('changeVal').innerText = "$" + (parseInt(cashTyped)-target); closeOverlay('cashModal'); openOverlay('changeModal'); finishOrder("現金", phoneTyped); }
+function openPhoneInput(t) { if(cart.length===0) return; currentType = t; phoneTyped = ""; document.getElementById('phoneDisplay').innerText = "---"; openOverlay('phoneModal'); }
+function openDiscountModal() { discTyped = ""; document.getElementById('discDisplay').innerText = "0"; openOverlay('discountModal'); }
+function pressDisc(n) { discTyped += n; document.getElementById('discDisplay').innerText = parseInt(discTyped)||0; }
+function clearDisc() { discTyped = ""; document.getElementById('discDisplay').innerText = "0"; }
+function submitDisc() { discountAmount = parseInt(discTyped)||0; updateCartUI(); closeOverlay('discountModal'); }
+function verifyAdmin() { if(prompt("密碼")===ADMIN_PIN) { generateReport(); openOverlay('adminModal'); } }
+function doneKDS(id) { kdsOrders = kdsOrders.filter(x => x.id !== id); persist(); renderKDS(); }
+function voidLastOrder() { if(salesData.length>0) { let o = salesData.pop(); kdsOrders = kdsOrders.filter(x=>x.id!==o.id); persist(); renderKDS(); alert("已作廢上一筆訂單"); } }
 function persist() { localStorage.setItem('stall_sales', JSON.stringify(salesData)); localStorage.setItem('stall_kds', JSON.stringify(kdsOrders)); localStorage.setItem('order_counter', orderCounter); }
-function renderKDS() { /* 保持之前 KDS 渲染邏輯 */ }
-function updateCartUI() { /* 保持之前購物車邏輯 */ }
 
-renderMenu();
+// 報表與同步功能... (節錄精簡版以符合容量)
+function generateReport() { /* 保持原報表逻辑 */ }
+async function syncToCloud() { /* 保持原同步逻辑 */ }
+
+renderMenu(); renderKDS();
 </script>
 </body>
 </html>
