@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>🦖 恐龍蛋 POS (iPad 專業版)</title>
+<title>🦖 恐龍蛋 POS (iPad 旗艦報表版)</title>
 <style>
     :root { 
         --theme-yellow: #fde047; --theme-orange: #fed7aa; 
@@ -12,67 +12,56 @@
         --slate: #64748b; --pink-disc: #fb7185;
         --line-green: #06c755; --px-blue: #3b82f6; --cash-gold: #fbbf24;
     }
-    /* iPad 全畫面修正 */
     body { margin: 0; font-family: 'PingFang TC', sans-serif; background: var(--soft-bg); color: var(--dark-text); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
-    
     .main-wrapper { display: flex; flex: 1; overflow: hidden; height: 100vh; }
     
-    /* 左側待出餐：滿版高度且可獨立滾動 */
-    .left-panel { width: 33%; border-right: 3px solid #eab308; display: flex; flex-direction: column; background: #fff; height: 100%; }
-    .left-panel header { background: var(--green); color: white; padding: 15px; font-weight: bold; text-align: center; font-size: 24px; flex-shrink: 0; }
+    /* 左側待出餐 */
+    .left-panel { width: 33%; border-right: 3px solid #eab308; display: flex; flex-direction: column; background: #fff; }
+    .left-panel header { background: var(--green); color: white; padding: 15px; font-weight: bold; text-align: center; font-size: 24px; }
     #kdsArea { flex: 1; overflow-y: auto; padding: 12px; background: #f8fafc; }
     
-    /* 右側操作區 */
-    .right-panel { width: 67%; display: flex; flex-direction: column; height: 100%; }
-    .right-panel header { background: var(--theme-yellow); text-align: center; padding: 8px; font-size: 16px; font-weight: bold; flex-shrink: 0; }
-    
-    /* 菜單區加大 */
+    /* 右側菜單 */
+    .right-panel { width: 67%; display: flex; flex-direction: column; }
+    .right-panel header { background: var(--theme-yellow); text-align: center; padding: 8px; font-size: 16px; font-weight: bold; }
     .items-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px; overflow-y: auto; flex: 1; }
-    .item-card { border-radius: 15px; padding: 10px; text-align: center; background: var(--theme-orange); border: 1px solid #fb923c; min-height: 100px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .item-card { border-radius: 15px; padding: 10px; text-align: center; background: var(--theme-orange); border: 1px solid #fb923c; min-height: 100px; display: flex; flex-direction: column; justify-content: center; }
     .item-name { font-size: 24px; font-weight: 900; }
     
-    /* 控制台區塊 */
-    .control-area { background: #fff; border-top: 3px solid var(--theme-yellow); flex-shrink: 0; padding-bottom: env(safe-area-inset-bottom); }
-    .cart-box { background: #fefce8; margin: 10px; padding: 12px; border-radius: 15px; border: 2px solid var(--theme-yellow); min-height: 80px; max-height: 120px; overflow-y: auto; font-size: 18px; font-weight: bold; }
-    .total-text { font-size: 40px; font-weight: bold; text-align: right; color: #854d0e; padding: 0 20px 5px 0; }
-    
-    /* 支付按鈕加大方便觸控 */
+    /* 控制台 */
+    .control-area { background: #fff; border-top: 3px solid var(--theme-yellow); padding-bottom: env(safe-area-inset-bottom); }
+    .cart-box { background: #fefce8; margin: 10px; padding: 12px; border-radius: 15px; border: 2px solid var(--theme-yellow); min-height: 60px; max-height: 100px; overflow-y: auto; font-size: 18px; font-weight: bold; }
+    .total-text { font-size: 40px; font-weight: bold; text-align: right; color: #854d0e; padding-right: 20px; }
     .pay-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 10px 15px 10px; }
-    .pay-grid button { padding: 20px 2px; border: none; border-radius: 15px; font-weight: bold; color: #fff; font-size: 18px; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
-    
-    /* KDS 卡片 */
+    .pay-grid button { padding: 20px 2px; border: none; border-radius: 15px; font-weight: bold; color: #fff; font-size: 18px; }
+
+    /* KDS 卡片樣式 */
     .kds-card { background: #fff; padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 2px solid #eab308; box-shadow: 0 4px 0 #fde047; position: relative; }
     .kds-amount { position: absolute; right: 15px; top: 15px; font-size: 22px; color: var(--blue); font-weight: 900; }
-    .kds-items { font-size: 24px; font-weight: 900; color: #000; margin: 10px 0; line-height: 1.3; border-top: 2px dashed #eee; padding-top: 10px; }
     .phone-tag { font-size: 32px; color: var(--red); font-weight: 900; text-decoration: underline dotted; }
+    .kds-items { font-size: 24px; font-weight: 900; color: #000; border-top: 2px dashed #eee; margin-top: 10px; padding-top: 10px; }
 
-    /* 彈窗樣式 */
+    /* 報表 UI 強化 */
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; z-index: 1000; align-items: center; justify-content: center; }
     .overlay.active { display: flex; }
-    .modal { background: #fff; width: 90%; max-width: 550px; padding: 30px; border-radius: 30px; box-sizing: border-box; max-height: 90vh; overflow-y: auto; text-align: center; }
+    .modal { background: #fff; width: 95%; max-width: 600px; padding: 25px; border-radius: 30px; box-sizing: border-box; max-height: 90vh; overflow-y: auto; text-align: center; }
+    .report-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px; }
+    .report-card { padding: 15px; border-radius: 15px; color: #fff; text-align: center; }
+    .report-table { width: 100%; border-collapse: collapse; margin-top: 10px; text-align: left; font-size: 18px; }
+    .report-table td, .report-table th { padding: 10px 5px; border-bottom: 1px solid #eee; }
     .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .num-grid button { padding: 25px 5px; font-size: 32px; font-weight: bold; border-radius: 20px; border: 1px solid #ddd; background: #fff; }
-    
-    .report-table { width: 100%; border-collapse: collapse; margin-top: 10px; text-align: left; }
-    .report-table td { padding: 12px 8px; border-bottom: 1px solid #eee; font-size: 18px; }
-    .btn-done { width: 100%; padding: 15px; background: var(--green); color: white; border: none; border-radius: 12px; margin-top: 10px; font-weight: bold; font-size: 22px; }
 </style>
 </head>
 <body>
 
 <div class="main-wrapper">
-    <div class="left-panel">
-        <header>待出餐明細</header>
-        <div id="kdsArea"></div>
-    </div>
-
+    <div class="left-panel"><header>待出餐明細</header><div id="kdsArea"></div></div>
     <div class="right-panel">
         <header>🦖 恐龍蛋 POS 系統</header>
         <div id="menuArea" class="items-container"></div>
-        
         <div class="control-area">
             <div class="cart-box" id="cartList">🛒 點餐內容...</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
                 <button onclick="voidLastOrder()" style="margin-left:15px; background:var(--red); color:white; border:none; padding:10px 20px; border-radius:12px; font-weight:bold; font-size:16px;">🚨 作廢上一筆</button>
                 <div class="total-text">總計 $<span id="finalTotal">0</span></div>
             </div>
@@ -87,12 +76,12 @@
     </div>
 </div>
 
-<div class="overlay" id="flavorModal"><div class="modal"><h3>🍡 口味選擇</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;"><button onclick="selectFlavor('花生')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🥜 花生</button><button onclick="selectFlavor('芝麻')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">⚫ 芝麻</button><button onclick="selectFlavor('3花2芝')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🌗 3花2芝</button><button onclick="selectFlavor('3芝2花')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🌓 3芝2花</button></div></div></div>
 <div class="overlay" id="phoneModal"><div class="modal"><h3>📱 手機末三碼</h3><div id="phoneDisplay" style="font-size:60px; text-align:center; padding:20px; background:#f1f5f9; border-radius:20px; margin-bottom:20px; font-weight:bold; color:var(--blue);">---</div><div class="num-grid"><button onclick="pressPhone('1')">1</button><button onclick="pressPhone('2')">2</button><button onclick="pressPhone('3')">3</button><button onclick="pressPhone('4')">4</button><button onclick="pressPhone('5')">5</button><button onclick="pressPhone('6')">6</button><button onclick="pressPhone('7')">7</button><button onclick="pressPhone('8')">8</button><button onclick="pressPhone('9')">9</button><button onclick="clearPhone()">清空</button><button onclick="pressPhone('0')">0</button><button onclick="confirmPhone()" style="background:var(--green); color:white;">確認</button></div></div></div>
 <div class="overlay" id="cashModal"><div class="modal"><h3>💰 現金實收</h3><div id="cashDisplay" style="font-size:60px; text-align:center; padding:20px; background:#f1f5f9; border-radius:20px; margin-bottom:20px; font-weight:bold; color:var(--green);">0</div><div class="num-grid"><button onclick="quickCash(100)" style="background:var(--blue); color:white;">+100</button><button onclick="quickCash(500)" style="background:var(--blue); color:white;">+500</button><button onclick="quickCash(1000)" style="background:var(--blue); color:white;">+1000</button><button onclick="pressCash('1')">1</button><button onclick="pressCash('2')">2</button><button onclick="pressCash('3')">3</button><button onclick="pressCash('4')">4</button><button onclick="pressCash('5')">5</button><button onclick="pressCash('6')">6</button><button onclick="pressCash('7')">7</button><button onclick="pressCash('8')">8</button><button onclick="pressCash('9')">9</button><button onclick="clearCash()">清除</button><button onclick="pressCash('0')">0</button><button onclick="submitCash()" style="background:var(--green); color:white;">結帳</button></div></div></div>
-<div class="overlay" id="changeModal"><div class="modal"><h2>應找零</h2><div id="changeVal" style="font-size:90px; color:var(--red); font-weight:bold;">$0</div><button onclick="closeOverlay('changeModal')" style="width:100%; padding:25px; background:var(--green); color:#fff; border:none; border-radius:20px; font-size:30px;">收錢完成</button></div></div>
-<div class="overlay" id="adminModal"><div class="modal" style="max-width:600px;"><div id="reportContent"></div><button onclick="closeOverlay('adminModal')" style="width:100%; padding:15px; background:#333; color:white; border:none; border-radius:15px; margin-top:15px;">關閉報表</button></div></div>
+<div class="overlay" id="changeModal"><div class="modal"><h2>應找零</h2><div id="changeVal" style="font-size:90px; color:var(--red); font-weight:bold;">$0</div><button onclick="closeOverlay('changeModal')" style="width:100%; padding:25px; background:var(--green); color:#fff; border:none; border-radius:20px; font-size:30px;">完成</button></div></div>
+<div class="overlay" id="adminModal"><div class="modal"><div id="reportContent"></div><button onclick="closeOverlay('adminModal')" style="width:100%; padding:15px; background:#333; color:white; border:none; border-radius:15px; margin-top:15px;">關閉報表</button></div></div>
 <div class="overlay" id="discountModal"><div class="modal"><h3>✂️ 折扣金額</h3><div id="discDisplay" style="font-size:60px; text-align:center; padding:20px; background:#f1f5f9; border-radius:20px; margin-bottom:20px; font-weight:bold; color:var(--red);">0</div><div class="num-grid"><button onclick="pressDisc('1')">1</button><button onclick="pressDisc('2')">2</button><button onclick="pressDisc('3')">3</button><button onclick="pressDisc('4')">4</button><button onclick="pressDisc('5')">5</button><button onclick="pressDisc('6')">6</button><button onclick="pressDisc('7')">7</button><button onclick="pressDisc('8')">8</button><button onclick="pressDisc('9')">9</button><button onclick="clearDisc()">清空</button><button onclick="pressDisc('0')">0</button><button onclick="submitDisc()" style="background:var(--green); color:white;">確認</button></div></div></div>
+<div class="overlay" id="flavorModal"><div class="modal"><h3>🍡 口味選擇</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;"><button onclick="selectFlavor('花生')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🥜 花生</button><button onclick="selectFlavor('芝麻')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">⚫ 芝麻</button><button onclick="selectFlavor('3花2芝')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🌗 3花2芝</button><button onclick="selectFlavor('3芝2花')" style="padding:25px; font-size:22px; font-weight:bold; border-radius:15px; border:2px solid orange;">🌓 3芝2花</button></div></div></div>
 
 <script>
 const ADMIN_PIN = "771130";
@@ -117,7 +106,7 @@ function renderMenu() {
     let h = "";
     products.forEach(p => {
         let count = cart.filter(x => x.name === p.name).length;
-        h += `<div class="item-card"><span class="item-name">${p.name}</span><span style="font-size:14px; color:#ea580c; font-weight:bold;">$${p.price}</span><div style="margin-top:10px; display:flex; justify-content:center; align-items:center; gap:12px;"><button class="btn-qty" onclick="removeFromCart('${p.name}')">-</button><b style="font-size:22px;">${count}</b><button class="btn-qty" onclick="addToCart('${p.name}')">+</button></div></div>`;
+        h += `<div class="item-card"><span class="item-name">${p.name}</span><span style="font-size:14px; color:#ea580c; font-weight:bold;">$${p.price}</span><div style="margin-top:10px; display:flex; justify-content:center; align-items:center; gap:12px;"><button class="btn-qty" style="width:40px;height:40px;font-size:24px;border-radius:10px;border:none;" onclick="removeFromCart('${p.name}')">-</button><b style="font-size:26px;">${count}</b><button class="btn-qty" style="width:40px;height:40px;font-size:24px;border-radius:10px;border:none;" onclick="addToCart('${p.name}')">+</button></div></div>`;
     });
     document.getElementById('menuArea').innerHTML = h;
 }
@@ -153,7 +142,7 @@ function renderKDS() {
             <div style="font-size:16px; font-weight:bold;">NO.${o.orderNo} <span style="background:${pColor}; padding:2px 8px; border-radius:8px; color:${o.type==='現金'?'black':'white'}">${o.type}</span></div>
             <div style="margin-top:5px;"><span class="phone-tag" onclick="startEditPhone(${o.id})">📞 ${o.phone}</span></div>
             <div class="kds-items">${Object.entries(o.items).map(([n,q])=>`• ${n} <span style="font-size:32px;">x${q}</span>`).join("<br>")}</div>
-            <button onclick="doneKDS(${o.id})" class="btn-done">叫號取餐</button>
+            <button onclick="doneKDS(${o.id})" style="width:100%; padding:15px; background:var(--green); color:white; border:none; border-radius:12px; margin-top:10px; font-weight:bold; font-size:22px;">叫號取餐</button>
         </div>`;
     });
     document.getElementById('kdsArea').innerHTML = h || "<p style='text-align:center; color:#999;'>尚無待出餐</p>";
@@ -162,32 +151,57 @@ function renderKDS() {
 function generateReport() {
     const today = new Date().toLocaleDateString();
     const todayData = salesData.filter(s => s.date === today);
-    let total = 0, totalQty = 0, payStats = { "現金":0, "LINE Pay":0, "全支付":0 }, prodStats = {};
+    let total = 0, totalQty = 0, payStats = { "現金":0, "LINE Pay":0, "全支付":0 }, prodStats = {}, hourStats = {};
+    
     todayData.forEach(s => {
         total += s.amount; payStats[s.type] += s.amount;
+        hourStats[s.hour] = (hourStats[s.hour] || 0) + s.amount;
         for(let k in s.items) { prodStats[k] = (prodStats[k]||0) + s.items[k]; totalQty += s.items[k]; }
     });
 
-    let h = `<h2>📊 今日報表 ($${total})</h2>`;
-    h += `<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:15px;">
-            <div style="background:var(--cash-gold);padding:15px;border-radius:12px;">現金<br><b>$${payStats["現金"]}</b></div>
-            <div style="background:var(--line-green);padding:15px;border-radius:12px;color:white;">LINE<br><b>$${payStats["LINE Pay"]}</b></div>
-            <div style="background:var(--px-blue);padding:15px;border-radius:12px;color:white;">全支付<br><b>$${payStats["全支付"]}</b></div>
+    let h = `<h2 style="margin-bottom:10px;">📊 營運報表 (${today})</h2>`;
+    
+    // 最上方：總金額彩色大方塊
+    h += `<div class="report-stat-grid">
+            <div class="report-card" style="background:var(--slate); grid-column: span 2;">今日總營收<br><b style="font-size:36px;">$${total}</b></div>
+            <div class="report-card" style="background:var(--cash-gold); color:black;">💰 現金<br><b>$${payStats["現金"]}</b></div>
+            <div class="report-card" style="background:var(--line-green);">💬 LINE Pay<br><b>$${payStats["LINE Pay"]}</b></div>
+            <div class="report-card" style="background:var(--px-blue);">💳 全支付<br><b>$${payStats["全支付"]}</b></div>
+            <div class="report-card" style="background:var(--red);">🔥 總份數<br><b>${totalQty} 份</b></div>
           </div>`;
-    h += `<div style="text-align:left; background:#f8fafc; padding:15px; border-radius:15px;"><h3>🏆 排行 (共 ${totalQty} 份)</h3><table class="report-table">`;
+
+    // 時段分析表格
+    h += `<div style="text-align:left; background:#f0f9ff; padding:15px; border-radius:15px; margin-bottom:15px;">
+            <h3 style="margin:0 0 10px 0; color:var(--blue);">🕒 時段銷售分析</h3>
+            <table class="report-table"><tr><th>時段</th><th>金額</th></tr>`;
+    Object.keys(hourStats).sort((a,b)=>a-b).forEach(hr => {
+        h += `<tr><td>${hr}:00 ~ ${hr}:59</td><td><b>$${hourStats[hr]}</b></td></tr>`;
+    });
+    h += `</table></div>`;
+
+    // 品項排行
+    h += `<div style="text-align:left; background:#fff7ed; padding:15px; border-radius:15px; margin-bottom:15px;">
+            <h3 style="margin:0 0 10px 0; color:#ea580c;">🏆 熱銷品項排行</h3>
+            <table class="report-table">`;
     Object.entries(prodStats).sort((a,b)=>b[1]-a[1]).forEach(([n,q])=> h += `<tr><td>${n}</td><td style="text-align:right;"><b>${q}</b> 份</td></tr>`);
     h += `</table></div>`;
-    h += `<h3>📜 詳細流水(退單)</h3><div style="max-height:250px; overflow-y:auto; border:1px solid #ddd; padding:10px; border-radius:10px;">`;
+
+    // 流水帳與退單
+    h += `<h3 style="text-align:left;">📜 消費流水 (點擊退單)</h3><div style="max-height:200px; overflow-y:auto; border:1px solid #ddd; border-radius:10px;">`;
     todayData.slice().reverse().forEach(s => {
-        h += `<div style="border-bottom:1px solid #eee; padding:10px 0; display:flex; justify-content:space-between; align-items:center;">
+        h += `<div style="border-bottom:1px solid #eee; padding:10px; display:flex; justify-content:space-between; align-items:center;">
                 <div style="text-align:left;">#${s.orderNo} | $${s.amount} (${s.phone})<br><small>${s.time}</small></div>
-                <button onclick="voidSpecificOrder(${s.id})" style="background:var(--red); color:white; border:none; border-radius:8px; padding:8px 15px;">退單</button>
+                <button onclick="voidSpecificOrder(${s.id})" style="background:var(--red); color:white; border:none; border-radius:8px; padding:8px 12px;">退單</button>
               </div>`;
     });
-    h += `</div><button onclick="syncToCloud()" id="btnSync" style="width:100%; padding:20px; background:var(--green); color:white; border:none; border-radius:15px; margin-top:20px; font-weight:bold; font-size:22px; box-shadow:0 4px 0 #15803d;">☁️ 結束營業並同步雲端</button>`;
+    h += `</div>`;
+
+    h += `<button onclick="syncToCloud()" id="btnSync" style="width:100%; padding:20px; background:var(--green); color:white; border:none; border-radius:15px; margin-top:20px; font-weight:bold; font-size:24px; box-shadow:0 4px 0 #15803d;">☁️ 結束營業並同步雲端</button>`;
+    
     document.getElementById('reportContent').innerHTML = h;
 }
 
+// 基礎功能
 async function syncToCloud() {
     const btn = document.getElementById('btnSync');
     const today = new Date().toLocaleDateString();
@@ -197,16 +211,16 @@ async function syncToCloud() {
         total += s.amount; payStats[s.type] += s.amount;
         for(let k in s.items) { prodStats[k] = (prodStats[k]||0) + s.items[k]; totalQty += s.items[k]; }
     });
-    if(!confirm(`同步 $${total} 元？成功後將清空本地單號。`)) return;
-    btn.innerText = "⏳ 同步中..."; btn.disabled = true;
+    if(!confirm(`確認上傳 $${total} 元？上傳後會清空單號並重置。`)) return;
+    btn.innerText = "⏳ 正在傳輸..."; btn.disabled = true;
     try {
         await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ date: today, totalRevenue: total, totalQty: totalQty, payStats: payStats, details: prodStats }) });
-        alert("🎉 同步成功！"); localStorage.clear(); location.reload();
-    } catch (e) { alert("同步失敗"); btn.innerText = "☁️ 重新同步"; btn.disabled = false; }
+        alert("🎉 同步成功！辛苦了老闆！"); localStorage.clear(); location.reload();
+    } catch (e) { alert("同步失敗，請檢查網路"); btn.innerText = "☁️ 重新同步"; btn.disabled = false; }
 }
 
 function startEditPhone(id) { editingKdsId = id; currentType = "EDIT_PHONE"; phoneTyped = ""; document.getElementById('phoneDisplay').innerText = "---"; openOverlay('phoneModal'); }
-function voidSpecificOrder(id) { if(!confirm("確定作廢？")) return; salesData = salesData.filter(x=>x.id!==id); kdsOrders = kdsOrders.filter(x=>x.id!==id); persist(); renderKDS(); if(document.getElementById('adminModal').classList.contains('active')) generateReport(); }
+function voidSpecificOrder(id) { if(!confirm("確定要作廢此單嗎？")) return; salesData = salesData.filter(x=>x.id!==id); kdsOrders = kdsOrders.filter(x=>x.id!==id); persist(); renderKDS(); if(document.getElementById('adminModal').classList.contains('active')) generateReport(); }
 function voidLastOrder() { if(salesData.length>0) voidSpecificOrder(salesData[salesData.length-1].id); }
 function openOverlay(id) { document.getElementById(id).classList.add('active'); }
 function closeOverlay(id) { document.getElementById(id).classList.remove('active'); }
@@ -229,7 +243,7 @@ function confirmPhone() {
 function pressCash(n) { cashTyped += n; document.getElementById('cashDisplay').innerText = parseInt(cashTyped)||0; }
 function quickCash(v) { let cur = parseInt(document.getElementById('cashDisplay').innerText)||0; cashTyped = (cur+v).toString(); document.getElementById('cashDisplay').innerText = cashTyped; }
 function clearCash() { cashTyped = ""; document.getElementById('cashDisplay').innerText = "0"; }
-function submitCash() { const t = parseInt(document.getElementById('finalTotal').innerText); if(parseInt(cashTyped||0)<t) return alert("金額不足"); document.getElementById('changeVal').innerText = "$" + (parseInt(cashTyped)-t); closeOverlay('cashModal'); openOverlay('changeModal'); finishOrder("現金", phoneTyped); }
+function submitCash() { const t = parseInt(document.getElementById('finalTotal').innerText); if(parseInt(cashTyped||0)<t) return alert("實收不足"); document.getElementById('changeVal').innerText = "$" + (parseInt(cashTyped)-t); closeOverlay('cashModal'); openOverlay('changeModal'); finishOrder("現金", phoneTyped); }
 function openDiscountModal() { discTyped = ""; document.getElementById('discDisplay').innerText = "0"; openOverlay('discountModal'); }
 function pressDisc(n) { discTyped += n; document.getElementById('discDisplay').innerText = parseInt(discTyped)||0; }
 function clearDisc() { discTyped = ""; document.getElementById('discDisplay').innerText = "0"; }
